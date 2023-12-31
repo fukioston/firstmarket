@@ -1,0 +1,36 @@
+table {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: aliceblue;
+    border-spacing: 17px; 
+    /* 根据需要调整间距大小 */
+    width: 1370px;
+    height: 625px;
+
+  }
+  
+.vertical-layout {
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    width: 252px;
+    height: 280px;
+}
+
+.setimage {
+    width:252px;
+    height:200px;
+    transition: transform 0.3s;
+    border-radius: 3%;
+  }
+  .setimage:hover {
+    transform: scale(1.03);
+  }
+.pagechange{
+    display:flex;
+    justify-content: flex-end;
+}
+button{
+    opacity: 60%;
+}

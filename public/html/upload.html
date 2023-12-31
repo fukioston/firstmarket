@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf=8">
+    <title>上传商品</title>
+    <link href="../css/upload.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript">
+      function popDiv(){
+          var popBox = document.getElementById("popup");
+          var popLayer =document.getElementById("poplayer");
+          popBox.style.display="block";
+          popLayer.style.display = "block";
+      }
+      function closePop(){
+          let popDiv =document.getElementById("popup");
+          popDiv.style.display="none";
+      function closePop2(){
+          let popDiv =document.getElementById("popup");
+          popDiv.style.display="none";
+      }
+      }
+      </script>
+</head>
+
+<body>
+  <div id="popup" class="modal"> <!-- 遮罩层 -->
+    <div class="container">
+        <p>
+        <h2>确认退出登录？</h2>
+        </p>
+        <div class="close">
+            <a href="javascript:void(0)" onclick="closePop();">X</a>
+        </div>
+        <div class="back">
+            <button class="button1" onclick="window.location.href='./login.html'">确认</button>
+            <button class="button2" onclick="closePop();">取消</button>
+        </div>
+    </div>
+</div>
+<other>
+<ul>
+    <li class="logo"><img src="../htmlpictures/logo2.jpg" alt="MAIDONGDONG" height="60px"></li>
+    <li><a href="./main.html">首页</a></li>
+    <li><a href="./userCenter.html">个人中心</a></li>
+    <li><a href="./collect.html">我的收藏</a></li>
+    <li><a  href="./mygoods.html">我的商品</a></li>
+    <li><a class="active"href="./upload.html">商品上传</a></li>
+    <li id="poplayer" style="float:right;"><a class="right" href="javascript:void(0)" onclick="popDiv();">退出登录</a></li>
+    <li style="float:right;"><a id="login" class="right" href="./login.html">登录</a></li>
+    <li style="float:right;"><a id="register" class="right" href="./register.html">注册</a></li>  
+</ul>
+<div class="buchong"></div>
+  
+<div class="PictureContainer">
+  <div class="pic" >
+  <input  class="uploadinput" id="uploadpic" style="position: absolute; top: 0; bottom: 0; left: 0;right: 0; opacity: 0;" type="file" />
+  <!-- 设置商品界面的图片 -->
+  <img id="commoditypicture" src="../htmlpictures/jiahao.jpg"  alt="请上传图片" title="preview-img" class="Picture active">
+</div>
+</div>
+
+<div class="information">
+  <section>
+  <div style="padding-left: 140px;"><h2>😎上传商品信息😎</h2></div>
+  <li style="list-style: none; font-size: 23px;">🎁商品名称🎁：</li>
+  <input id="name" class="nameinput" type="text" >
+  <li style="list-style: none; font-size: 23px;" >💴预估价格💴：</li>
+  <input id="money" class="nameinput" type="text" >
+  <li style="list-style: none; font-size: 23px;">📢联系方式📢：</li>
+  <input id="connectnum"class="nameinput" type="text" >
+  <li style="list-style: none; font-size: 23px;">📙商品介绍📙：</li>
+  <textarea id="introduction" class="beizhu"></textarea>
+  <div style="padding-left: 100px;"><button id="uploadBtn" class="buttons1">确定上传</button><a href="./main.html"><button class="buttons2">返回</button></a></div>
+  </section>
+</div>
+
+
+<script src="../js/jquery.min.js"></script>
+<script>
+  isLogin();
+function isLogin(){
+$.ajax({
+   url:'/api/islogin',
+   type:'get',
+   headers:{
+       Authorization:localStorage.token
+   },
+   success(msg){if(msg.status){alert('你还没有登录')
+   location.href="./login.html"}
+   else{
+            var a1 = document.getElementById("login");
+        a1.innerHTML = msg.data.name  ;
+        var a2 = document.getElementById("register");
+        a2.innerHTML ='';
+        }},
+   error(err){
+if(err.status==401){alert('你还没有登录')
+location.href="./login.html"
+}     }
+    })
+    }
+$('#uploadpic').change(function(event){
+            //1.获取相关信息
+            console.log('hahah')
+              const files=this.files;
+              //将获取的图片信息添加到表单对象FormData
+              const formdata=new FormData();
+              formdata.append('file',files[0]);
+              console.log(files[0])
+            //   通过ajax将表单对象发送到服务器
+            $.ajax({
+                url:'/commodity/uploadpic',
+                type:'post',
+                data:formdata,
+                //不采取缓存中结果
+                cache:false,
+                //数据编码格式不适用jquery方式
+                contentType:false,
+                //发送的图片数据不转化为其他格式
+                processData:false,
+                success(msg){console.log(msg.data)
+                   
+                    $('#commoditypicture').attr('src',`../picture/${msg.data}`)
+                                      .data('src',msg.data)
+                                      //$('#wodezhaopian').data('src')可以获取后传到upload，接着接到接口
+                                     
+                                    }
+
+            }
+            )
+
+        })
+        $('#uploadBtn').click(
+    function(){
+
+          const name=$('#name').val();
+          const money=$('#money').val();
+        const introduction=$('#introduction').val();
+        const connectnum=$('#connectnum').val();
+        const picturename=$('#commoditypicture').data('src');
+        
+$.ajax({
+        url:'/commodity/upload',
+        headers:{
+            Authorization:localStorage.token
+        },
+        data:{
+            name,introduction,connectnum,picturename,money
+            
+        },
+        type:'post',
+        success(msg){
+            
+            if(!msg.status)
+            {alert('上传成功') 
+            
+            location.href="./main.html"
+              }
+            else alert(msg.message)
+        }
+    })
+
+
+
+    }
+  )
+ </script>
+</body>
+
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf=8">
+    <title>我的收藏</title>
+    <link rel="stylesheet"  href="../bootstrap/css/bootstrap.min.css"/>
+    <link href="../css/collectcss.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript">
+        function popDiv(){
+            var popBox = document.getElementById("popup");
+            var popLayer =document.getElementById("poplayer");
+            popBox.style.display="block";
+            popLayer.style.display = "block";
+        }
+        function closePop(){
+            let popDiv =document.getElementById("popup");
+            popDiv.style.display="none";
+        function closePop2(){
+            let popDiv =document.getElementById("popup");
+            popDiv.style.display="none";
+        }
+        }
+        function  tuichu(){
+            localStorage.token="";
+            window.location.href='./login.html';
+        }
+        </script>
+</head>
+
+
+
+<body>
+    <div id="popup" class="modal"> <!-- 遮罩层 -->
+        <div class="container">
+            <p>
+            <h2>确认退出登录？</h2>
+            </p>
+            <div class="close">
+                <a href="javascript:void(0)" onclick="closePop();">X</a>
+            </div>
+            <div class="back">
+                <button class="button1" onclick="tuichu()">确认</button>
+                <button class="button2" onclick="closePop();">取消</button>
+            </div>
+        </div>
+    </div>
+    <other>
+    <ul class="dhul">
+        <li class="logo"><img src="../htmlpictures/logo2.jpg" alt="MAIDONGDONG" height="60px"></li>
+        <li><a href="./main.html">首页</a></li>
+        <li><a href="./userCenter.html">个人中心</a></li>
+        <li><a class="active" href="collect.html">我的收藏</a></li>
+        <li><a href="mygoods.html">我的商品</a></li>
+        <li><a href="upload.html">商品上传</a></li>
+        <li id="poplayer" style="float:right;"><a class="right" href="javascript:void(0)" onclick="popDiv();">退出登录</a></li>
+        <li style="float:right;"><a id="login" class="right" href="./login.html">登录</a></li>
+        <li style="float:right;"><a  id="register" class="right" href="./register.html">注册</a></li>  
+    </ul>
+    <div class="buchong"></div>
+    
+    
+
+    <div class="goodsarea">
+        <table class="goodsareatable">
+            <tbody class="goodsareatbody">
+                    
+                </tbody>
+                </table>
+        </div>
+        <div class="pagechange">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                  <li>
+                    <a id="previouspage" href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  
+                  <li>
+                    <a id="nextpage" href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+    <script src="../js/jquery.min.js"></script>
+<script>
+
+var currentpage=1;
+var nowgoods=1;
+isLogin();
+function isLogin(){
+$.ajax({
+    url:'/api/islogin',
+    type:'get',
+    headers:{
+        Authorization:localStorage.token
+    },
+    success(msg){if(msg.status){alert('你还没有登录')
+    location.href="./login.html"}
+    else{
+        
+        var a1 = document.getElementById("login");
+        a1.innerHTML = msg.data.name  ;
+        var a2 = document.getElementById("register");
+        a2.innerHTML ='';
+    }
+},
+    error(err){
+if(err.status==401){alert('你还没有登录')
+location.href="./login.html"
+}
+    }
+})
+}
+
+getmyfavorite();
+
+function getmyfavorite(){
+$.ajax({
+    url:'/commodity/getmyfavorite',
+    type:'get',
+    headers:{
+        Authorization:localStorage.token
+    },
+    data:{
+        currentpage
+    },
+    success(msg){
+        let tem1=''
+            nowgoods=msg.data.length;
+            console.log(nowgoods)
+            for(var i=0;i<msg.data.length;i+=5)//先把能画一整行的画出来
+        {   if(i+4<msg.data.length)
+            $('tbody').append(` <tr>
+                    
+                        <td>   
+                            <a id="getinfo" data-id="${msg.data[i].id}">
+                            <div class="vertical-layout">
+                                
+                            <image class="setimage" id="${msg.data[i].id}" src="../picture/${msg.data[i].picture}"></image>
+                            <div class="commodityname">${msg.data[i].name} </div>
+
+                            
+                            
+                           
+                            </div>
+                        </a>
+                            </td>
+                    
+                            <td> 
+                                <a id="getinfo" data-id="${msg.data[i+1].id}">
+                                <div class="vertical-layout">
+                                <image class="setimage" id="${msg.data[i+1].id}" src="../picture/${msg.data[i+1].picture}"></image>
+                                <div class="commodityname">${msg.data[i+1].name}</div>
+
+                            </div>
+                             </a>
+                            </td>
+                            <td> 
+                                <a id="getinfo" data-id="${msg.data[i+2].id}">
+                                <div class="vertical-layout"> 
+                                <image class="setimage" id="${msg.data[i+2].id}" src="../picture/${msg.data[i+2].picture}"></image>
+                                <div class="commodityname">${msg.data[i+2].name}</div>
+                            </div>
+                            </a>
+                            </td>
+                            <td> 
+                                <a id="getinfo" data-id="${msg.data[i+3].id}">
+                                <div class="vertical-layout">
+                                <image class="setimage" id="${msg.data[i+3].id}" src="../picture/${msg.data[i+3].picture}"></image>
+                                <div class="commodityname">${msg.data[i+3].name}</div>
+                           </div>
+                             </a>
+                            </td>
+                            <td> 
+                                <a id="getinfo" data-id="${msg.data[i+4].id}">
+                                <div class="vertical-layout">
+                                <image class="setimage" id="${msg.data[i+4].id}" src="../picture/${msg.data[i+4].picture}"></image>
+                                <div class="commodityname">${msg.data[i+4].name}</div>
+                          </div>
+                           </a>
+                            </td>
+                            </tr>
+                            `)
+            else{
+       var str='<tr>'
+                while(i<msg.data.length)
+                    {str+=` 
+                    
+                    <td>  
+                        <a id="getinfo" data-id="${msg.data[i].id}">
+                        <div class="vertical-layout">
+                        <image class="setimage" id="${msg.data[i].id}" src="../picture/${msg.data[i].picture}"></image>
+                        <div class="commodityname">${msg.data[i].name}</div>
+                        </div>
+                          </a>
+                        </td>`
+                        i++
+                    }
+                    str+=`</tr>`
+                    $('tbody').append(str)
+
+
+
+            }
+           
+
+        
+        
+        }
+        
+
+
+
+    
+    
+
+
+
+}
+})
+
+}
+$('tbody').on('click', '#getinfo', function() {
+console.log('点击了按钮 ');
+const id=$(this).data('id')
+console.log(id)
+localStorage.setItem("commodityid",id)
+location.href = './goods.html';
+});
+$('#nextpage').click(function(){
+
+currentpage+=1;
+if(nowgoods<10){currentpage--;alert('商品页面已经是最后一页')}
+else{$('tbody').html('')
+getmyfavorite();}
+})
+$('#previouspage').click(function(){
+console.log('hahaha')
+currentpage-=1;
+if(currentpage<1)
+{currentpage=1; alert('商品页面已经是第一页')       }
+else{$('tbody').html('')
+getmyfavorite();}
+})
+$('tbody').on('click', '#cancelmyfavorite', function() {
+const commodity_id=$(this).data('id')
+$.ajax({
+    url:'/commodity/cancelmyfavorite',
+    type:'post',
+    headers:{
+        Authorization:localStorage.token
+    },
+    data:{
+        commodity_id
+
+    },
+    success(msg){
+        alert(msg.message)
+        $('tbody').html('')
+        getmyfavorite()
+
+    },
+    error(err){
+      alert(err)
+    }
+})
+
+});
+
+
+</script>
+
+</body>
+
+</html>

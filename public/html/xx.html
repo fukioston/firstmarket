@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <title>Document</title>
+</head>
+<style>
+    body{
+	background: #E2E5EE;
+}
+.close:focus{
+	outline: none;
+}
+.container.justify-content-center{
+	margin-top: 200px;
+}
+.modal-header{
+	border: none;
+}
+.modal-footer{
+	border: none;
+}
+.btn-danger{
+	background: #DD2750;
+	border: 1px solid #C43352;
+}
+.btn-light{
+	border: 1px solid #E7E7E9;
+}
+.btn:focus{
+	box-shadow: none;
+}
+</style>
+<body>
+    ??
+    <div class="container d-flex justify-content-center">
+        <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#exampleModal">DELETE</button>
+    </div>
+    
+    
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+              <div class="container d-flex pl-0"><img src="https://imgur.com/Kh1gwTq.png"><h5 class="modal-title ml-2" id="exampleModalLabel">Delete the link?</h5></div>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p class="text-muted">If you delete the link will be gone forever. Are you sure you want to proceed?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+</body>
+</html>

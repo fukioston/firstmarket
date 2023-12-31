@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <meta charset="utf=8">
+    <title>商品管理</title>
+    <link href="../css/Product_Details.css" rel="stylesheet" type="text/css">
+    <!-- 链接到css -->
+    <script type="text/javascript">
+        function popDiv(){
+            var popBox = document.getElementById("popup");
+            var popLayer =document.getElementById("poplayer");
+            popBox.style.display="block";
+            popLayer.style.display = "block";
+        }
+        function closePop(){
+            let popDiv =document.getElementById("popup");
+            popDiv.style.display="none";
+        function closePop2(){
+            let popDiv =document.getElementById("popup");
+            popDiv.style.display="none";
+        }
+        }
+        </script>
+</head>
+
+<body>
+
+
+
+    <div id="popup" class="modal"> <!-- 遮罩层 -->
+        <div class="container">
+            <p>
+            <h2>确认退出登录？</h2>
+            </p>
+            <div class="close">
+                <a href="javascript:void(0)" onclick="closePop();">X</a>
+            </div>
+            <div class="back">
+                <button class="button1" onclick="window.location.href='./login.html'">确认</button>
+                <button class="button2" onclick="closePop();">取消</button>
+            </div>
+        </div>
+    </div>
+    <other>
+    <ul>
+        <li class="logo"><img src="../htmlpictures/logo2.jpg" alt="MAIDONGDONG" height="60px"></li>
+        <li><a href="./main.html">首页</a></li>
+        <li><a href="./userCenter.html">个人中心</a></li>
+        <li><a  href="./collect.html">我的收藏</a></li>
+        <li><a class="active" href="./mygoods.html">我的商品</a></li>
+        <li><a href="./upload.html">商品上传</a></li>
+        <li id="poplayer" style="float:right;"><a class="right" href="javascript:void(0)" onclick="popDiv();">退出登录</a></li>
+        <li style="float:right;"><a id="username" class="right" href="./userCenter.html">登录</a></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="PictureContainer">
+        <!-- 设置商品界面的图片 -->
+        <img id="pic1" src="../htmlpictures/1.jpg" alt="图片1" class="Picture active">
+    </div>
+
+    <div class="information">
+        <section>
+        <h2>当前商品信息</h2>
+        <li  style="list-style: none; font-size: 23px;">商品名称：</li>
+        <p id="name">这里是商品的名称</p>
+        <li  style="list-style: none; font-size: 23px;" >价格：</li>
+        <p id="prize">这里是商品的价格</p>
+        <li  style="list-style: none; font-size: 23px;">联系方式：</li>
+        <p id="connectnum">这里是商家的联系方式</p>
+        <li  style="list-style: none; font-size: 23px;">备注：</li>
+        <p id="introduction">在这里输入备注在这里输入备注在这里输入备注在这里输入备注在这里输入备注在这里输入备注在这里输入备注在这里输入备注在这里输入备注在这里输入备注</p>
+        
+        </section>
+    
+    </div>
+
+<div class="revise">
+    <div class="Name">
+        商品名称
+    </div>
+
+    <div class="Introduction">
+        价格
+    </div>
+    <div class="Email">
+        联系方式
+    </div>
+    <!-- <div class="State">
+        状态
+    </div> -->
+    <div class="remark">
+        备注
+    </div>
+    <div class="Note"></div>
+
+    <div class='revise_button'>
+    <button id="change1" class="Name_revise">✎</button>
+    <button id="change2" class="Introduction_revise"> ✎ </button>
+    <button id="change3" class="Email_revise"> ✎ </button>
+    <button id="change4" class="remark_revise"> ✎ </button>
+    </div>
+
+    <form name="form">    
+        <input class="Name_screen" id="textInput" type="text" >
+
+        <input class="Introduction_screen" id="textInput2" type="text">
+
+        <input class="Email_screen" id="textInput3" name="Introduction_screen" >
+
+        <input class="remark_screen" id="textInput4" name="Introduction_screen" >
+    </form>
+
+    <!-- <select class="select">
+        <option value="apple">有货</option>
+        <option value="banana">缺货</option>
+    </select> -->
+
+</div>
+
+
+
+
+<!-- <div class="else">
+
+</div> -->
+
+
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/Product_Details.js"></script>
+<script>
+    isLogin();
+  function isLogin(){
+  $.ajax({
+      url:'/api/islogin',
+      type:'get',
+      headers:{
+          Authorization:localStorage.token
+      },
+      success(msg){if(msg.status){alert('你还没有登录')
+      location.href="./login.html"}
+      else{
+            var a1 = document.getElementById("username");
+        a1.innerHTML = msg.data.name  ;
+        
+        }},
+      error(err){
+  if(err.status==401){alert('你还没有登录')
+  location.href="./login.html"
+  }
+      }
+  })
+  }
+getinfo()
+           function getinfo(){
+               
+               const commodityid=localStorage.getItem("commodityid")
+                 
+               
+       $.ajax({
+               url:'/commodity/getcommodityinfo',
+               // headers:{
+               //     Authorization:localStorage.token
+               // },
+               data:{
+                   
+                   commodityid
+               },
+               type:'get',
+               success(msg){
+                   const i=1
+                   if(!msg.status)
+                   {
+                   console.log(msg.data.picture)
+                   $(`#pic1`).attr('src',`../picture/${msg.data.picture}`)
+                   var element1 = document.getElementById("name"); // 获取指定的HTML元素
+                           element1.innerHTML =msg.data.name ;
+                           var element2 = document.getElementById("introduction"); // 获取指定的HTML元素
+                           element2.innerHTML =msg.data.introduction ;
+                           var element3 = document.getElementById("prize"); // 获取指定的HTML元素
+                           element3.innerHTML =msg.data.money ;
+                           var element4 = document.getElementById("connectnum"); // 获取指定的HTML元素
+                           element4.innerHTML =msg.data.connectnum ;
+                           var element5 = document.getElementById("state"); // 获取指定的HTML元素
+                        //    element4.innerHTML = ;
+       
+       
+       
+                     }
+                   else alert(msg.message)
+               }
+           })
+       
+       
+       
+           }
+         
+           $('#change1').click(function(){
+            var name=$('#textInput').val();
+            const commodityid=localStorage.getItem("commodityid")
+            $.ajax({
+      url:'/commodity/updateCommodityinfo',
+      type:'post',
+      data:{
+        name,commodityid
+      },
+      success(msg){
+        getinfo()
+      }
+    })
+
+})
+$('#change2').click(function(){
+    console.log("??")
+            var money=$('#textInput2').val();
+            
+            const commodityid=localStorage.getItem("commodityid")
+            $.ajax({
+      url:'/commodity/updateCommodityinfo2',
+      type:'post',
+      data:{
+        money,commodityid
+      },
+      success(msg){
+        getinfo()
+      }
+    })
+
+})
+$('#change3').click(function(){
+            var connectnum=$('#textInput3').val();
+            const commodityid=localStorage.getItem("commodityid")
+            $.ajax({
+      url:'/commodity/updateCommodityinfo3',
+      type:'post',
+      data:{
+        connectnum,commodityid
+      },
+      success(msg){
+        getinfo()
+      }
+    })
+
+})
+$('#change4').click(function(){
+            var introduction=$('#textInput4').val();
+            const commodityid=localStorage.getItem("commodityid")
+            $.ajax({
+      url:'/commodity/updateCommodityinfo4',
+      type:'post',
+      data:{
+        introduction,commodityid
+      },
+      success(msg){
+        getinfo()
+      }
+    })
+
+})
+       </script>
+<!-- 链接到js -->
+
+</body>

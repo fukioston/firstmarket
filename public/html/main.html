@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="uft-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        首页
+    </title>
+    <link href="../css/main.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript">
+        function popDiv() {
+            var popBox = document.getElementById("popup");
+            var popLayer = document.getElementById("poplayer");
+            popBox.style.display = "block";
+            popLayer.style.display = "block";
+        }
+        function closePop() {
+            let popDiv = document.getElementById("popup");
+            popDiv.style.display = "none";
+            function closePop2() {
+                let popDiv = document.getElementById("popup");
+                popDiv.style.display = "none";
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+    <div id="popup" class="modal"> <!-- 遮罩层 -->
+        <div class="container">
+            <p>
+            <h2>确认退出登录？</h2>
+            </p>
+            <div class="close">
+                <a href="javascript:void(0)" onclick="closePop();">X</a>
+            </div>
+            <div class="back">
+                <button class="button1" onclick="window.location.href='./login.html'">确认</button>
+                <button class="button2" onclick="closePop();">取消</button>
+            </div>
+        </div>
+    </div>
+    <other>
+        <ul class="title1">
+            <li class="logo"><img src="../htmlpictures/logo2.jpg" alt="MAIDONGDONG" height="60px"></li>
+        <li><a class="active" href="./main.html">首页</a></li>
+        <li><a href="./userCenter.html">个人中心</a></li>
+        <li><a  href="./collect.html">我的收藏</a></li>
+        <li><a href="./mygoods.html">我的商品</a></li>
+        <li><a href="./upload.html">商品上传</a></li>
+        <li id="poplayer" style="float:right;"><a class="right" href="javascript:void(0)" onclick="popDiv();">退出登录</a></li>
+        <li style="float:right;"><a id="username" class="right" href="./userCenter.html">登录</a></li>
+         
+        </ul>
+    </other>
+    <div class="main">
+        <div class="seek">
+            <div class="seekdiv"><p>商品搜索：</p>  <input><button class="search">搜索</button></div>
+
+        </div>
+        <!-- <div class="promo">
+            <img>
+            <a href="#" class="prev"> < </a>
+            <a href="#" class="next"> > </a>
+            <ul class="promo-nav">
+                <li class="selected"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div> -->
+        <h2 id="shangpin">
+            商品推荐:
+        </h2>
+        <div class="recommand">
+            <table class="goodsareatable">
+                <tbody class="goodsareatbody">
+                        
+                    </tbody>
+                    </table>
+            </div>
+        
+        <h2 id="find">
+            <a href="./allGoods.html" >
+                    查看全部商品
+            </a>
+        </h2>
+    </div>
+    <script src="../js/jquery.min.js"></script>
+<script>
+    isLogin();
+    function isLogin(){
+    $.ajax({
+        url:'/api/islogin',
+        type:'get',
+        headers:{
+            Authorization:localStorage.token
+        },
+        success(msg){if(msg.status){alert('你还没有登录')
+        location.href="./login.html"}
+    else{var a1 = document.getElementById("username");
+        a1.innerHTML = msg.data.name  ;}
+    },
+        error(err){
+    if(err.status==401){alert('你还没有登录')
+    location.href="./login.html"
+}
+        }
+    })
+    }
+    Getrecommand();
+   
+        function Getrecommand(){
+            $.ajax({
+                url:'/commodity/GetRandomCommodity',
+        type:'get',
+        headers:{
+            Authorization:localStorage.token
+        },
+        success(msg){
+            for(var i=0;i<6;i+=5)
+            $('tbody').append(` <tr>
+                    
+                    <td>   
+                        <a id="getinfo" data-id="${msg.data[i].id}">
+                        <div class="vertical-layout">
+                            
+                        <image class="setimage" id="${msg.data[i].id}" src="../picture/${msg.data[i].picture}"></image>
+                        <div class="commodityname">${msg.data[i].name} </div>
+
+                        
+                        
+                       
+                        </div>
+                    </a>
+                        </td>
+                
+                        <td> 
+                            <a id="getinfo" data-id="${msg.data[i+1].id}">
+                            <div class="vertical-layout">
+                            <image class="setimage" id="${msg.data[i+1].id}" src="../picture/${msg.data[i+1].picture}"></image>
+                            <div class="commodityname">${msg.data[i+1].name}</div>
+
+                        </div>
+                         </a>
+                        </td>
+                        <td> 
+                            <a id="getinfo" data-id="${msg.data[i+2].id}">
+                            <div class="vertical-layout"> 
+                            <image class="setimage" id="${msg.data[i+2].id}" src="../picture/${msg.data[i+2].picture}"></image>
+                            <div class="commodityname">${msg.data[i+2].name}</div>
+                        </div>
+                        </a>
+                        </td>
+                        <td> 
+                            <a id="getinfo" data-id="${msg.data[i+3].id}">
+                            <div class="vertical-layout">
+                            <image class="setimage" id="${msg.data[i+3].id}" src="../picture/${msg.data[i+3].picture}"></image>
+                            <div class="commodityname">${msg.data[i+3].name}</div>
+                       </div>
+                         </a>
+                        </td>
+                        <td> 
+                            <a id="getinfo" data-id="${msg.data[i+4].id}">
+                            <div class="vertical-layout">
+                            <image class="setimage" id="${msg.data[i+4].id}" src="../picture/${msg.data[i+4].picture}"></image>
+                            <div class="commodityname">${msg.data[i+4].name}</div>
+                      </div>
+                       </a>
+                        </td>
+                        </tr>
+                        `)
+
+
+
+        },
+        error(err){
+    if(err.status==401){alert('你还没有登录')
+    location.href="./login.html"}}
+                
+
+
+
+
+            })
+        }
+ $('tbody').on('click', '#getinfo', function() {
+console.log('点击了按钮 ');
+const id=$(this).data('id')
+console.log(id)
+localStorage.setItem("commodityid",id)
+location.href = './goods.html';
+});
+
+    
+
+    
+</script>
+</body>

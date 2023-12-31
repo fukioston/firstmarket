@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录-powered by MAIDONGDONG</title>
+    <link rel="stylesheet" type="text/css" href="../css/login.css">
+
+    <script src="https://kit.fontawesome.com/ee2c7f5701.js"></script>
+    <!-- 图标库 -->
+</head>
+<body>
+
+        <ul class="topnav">
+            <li class="logo"><img src="../htmlpictures/logo0.png" alt="MAIDONGDONG" height="60px"></li>
+
+
+    
+            <li style="float:right;"><a class="active" href="./login.html">登录</a></li>
+            <li style="float:right;"><a class="right" href="./register.html">注册</a></li>  
+        </ul>
+        <section>
+            <div class="background">
+                <div class="backimg">
+                    <img src="../htmlpictures/backg3.jpg" width="1536px">
+                </div>
+            </div>
+            <div class="box">
+                <span class="title"><b>登录</b></span>
+                <div class="text">
+                    <li>
+                        <i class="fa-regular fa-circle-user" style="font-size: 20px; color: #CF5A5A;"></i>
+                        账号
+                    </li>
+                    <li style="padding-top:72px;">
+    
+                        <i class="fa-regular fa-keyboard" style="font-size: 20px; color: #CF5A5A;"></i>
+                        密码
+                    </li>
+                </div>
+                <div class="input">
+                    <li>
+                        <input id="id" class="input-control" name="id" type="text" placeholder="请输入您的账号">
+                    </li>
+                    <li style="padding-top:60px;">
+                        <input id="password" class="input-control" name="password" type="password" placeholder="请输入您的密码">
+                    </li>
+                </div>
+                <div class="up">
+                    <button class="loginBtn" id="loginBtn">登录</button>
+                    <li class="tips">没有账号？<a href="./register.html" >注册</a></li>
+                </div>
+            </div>
+         </section>
+         <script src="../js/jquery.min.js"></script>
+    <script >
+        
+$('#loginBtn').click(
+    function(){
+
+const id=$('#id').val();
+const password=$('#password').val();
+$.ajax({
+        url:'/api/login',
+        data:{
+            id,password
+        },
+        type:'post',
+        success(msg){
+            // console.log(msg)
+            if(!msg.status)
+            {alert('登陆成功') 
+            localStorage.token=msg.token
+            location.href="./main.html"
+              }
+            else alert(msg.message)
+        }
+    })
+
+
+
+    }
+  )
+
+
+    
+
+    </script>
+</body>
+</html>

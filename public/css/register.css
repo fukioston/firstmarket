@@ -1,0 +1,143 @@
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #f0dcdc;
+    min-width: 1536px;
+}
+  .topnav {
+      position:relative;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 997;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #ffffff;
+    }
+
+
+   .topnav li {
+        float: left;
+        margin-left: 20px;
+        margin-top:8px;
+        margin-bottom: 8px;
+      }
+  
+     .topnav li a {
+        display: block;
+        text-align: center;
+        padding: 20px 16px;
+        text-decoration: none;
+        font-size: 16px;
+      }
+      .topnav a:not(.active,.logo,.right) {
+        color: rgb(0, 0, 0);
+      }
+      .topnav a:hover:not(.active,.logo) {
+        color:#CF5A5A;
+      }
+    .logo{
+      height: 60px;
+      padding-left: 100px;
+    }
+      .active {
+        background-color: #CF5A5A;
+        color: white;
+      
+      }
+      .right{
+        color:#42A6BE;
+        margin-right: 100px;
+      }
+      section{
+        position: relative;
+   
+      }
+        .background{
+            position: fixed;
+            width: 1536px;
+            height: 634px;
+            /* height: 714px; */
+            overflow: hidden;
+            opacity: 0.4;
+            filter:alpha(opacity=40);
+        }
+        .box{
+            list-style-type:none; 
+            width: 390px;
+            height: 380px;
+            position: relative;
+            float: right;
+            margin-top: 126px;
+            margin-right: 200px;
+            padding: 30px 40px;
+            box-sizing: border-box;
+            border-radius: 10px;
+            border-style:solid;
+            border-width: 2px;
+            border-color: #CF5A5A;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+            .title{
+                display: block;
+                text-align: center;
+                font-size: 26px;
+            }
+            .text{
+                position: absolute;
+                display: block;
+                float: left;
+                padding-top: 7px;
+                font-size: 18px;
+                margin: 30px 10px;
+                width: 70px;
+                color: #b13d3d;
+            }
+            .input{
+                display: block;
+                float: left;
+                width: 214px;
+                margin: 32px 0px;
+            }
+                .input input{
+                    width: 100%;
+                    font-size: 16px;
+                    padding: 8px ;
+                    padding-left: 76px;
+                    padding-right: 16px;
+                    border: 1px solid #dcd9d9;
+                    border-radius: 5px;
+                    resize: none;
+                }
+                .input input:hover{
+                    border: 1px solid #CF5A5A;
+                  }
+                .input input:focus{
+                    outline:none;
+                    border: 1px solid #CF5A5A;
+                  }
+            .registerbtn{
+                width: 100%;
+                padding: 8px;
+                background-color: #CF5A5A;
+                color: #ffffff;
+                font-size: 16px;
+                border: 1px solid #CF5A5A;
+                border-radius: 5px;
+            }
+                .registerbtn:hover{
+                    background-color: #d04747;
+                }
+            .tips{
+                margin: 20px;
+                float: right;
+                font-size: 14px;
+            }
+            .tips a{
+                color:#CF5A5A;
+                text-decoration: none;
+            }
+    

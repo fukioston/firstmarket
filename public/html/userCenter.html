@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心-powered by MAIDONGDONG</title>
+    <link rel="stylesheet" type="text/css" href="../css/userCenter.css">
+    
+    <!-- <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/amazeui.min.css">
+    <link rel="stylesheet" href="css/amazeui.cropper.css">
+    <link rel="stylesheet" href="css/avatar.css"> -->
+    <!-- 图片裁剪功能 -->
+
+    <!-- <script src="js/jquery.min.js" charset="utf-8"></script>
+    <script src="js/amazeui.min.js" charset="utf-8"></script>
+    <script src="js/cropper.min.js" charset="utf-8"></script> -->
+    <!-- 图片裁剪功能 -->
+
+    <script src="https://kit.fontawesome.com/ee2c7f5701.js"></script>
+    <!-- 图标库 -->
+
+
+     <script type="text/javascript"> 
+        // 弹窗1：退出登录
+        function popDiv(){
+            var popBox = document.getElementById("popup");
+            var popLayer =document.getElementById("poplayer");
+            popBox.style.display="block";
+            popLayer.style.display = "block";
+        }
+        function closePop(){
+            let popDiv =document.getElementById("popup");
+            popDiv.style.display="none";
+
+        }
+
+        //弹窗2 头像裁剪
+        function popDiv2(){
+            var popBox2 =document.getElementById("popup2");
+            var popLayer2 =document.getElementById("poplayer2");
+            popBox2.style.display="block";
+            popLayer2.style.display="block";
+        }
+        function closepop2(){
+            let popDiv2 =document.getElementById("popup2");
+            popDiv2.style.display="none";
+        }
+        //弹窗3 页面切换
+        function popDiv3(){
+            var popleft1=document.getElementById("popleft1");
+            var popright1=document.getElementById("popright1");
+            var popleft2=document.getElementById("popleft2");
+            var popright2=document.getElementById("popright2");
+            popleft1.style.display="block";
+            popleft2.style.display="none";
+            popright1.style.display="block";
+            popright2.style.display="none";
+        }
+        //弹窗4 页面切换2
+        function popDiv4(){
+            popleft2.style.display="block";
+            popleft1.style.display="none";
+            popright2.style.display="block";
+            popright1.style.display="none";
+        }
+     </script>
+     
+        //预览图片
+	
+        
+        // $inputFile.addEventListener('change', function() {
+        //     const file = this.files[0];
+        //     $previewImage.src = file ? URL.createObjectURL(file) : '';
+        // }, this);
+
+       
+
+</head>
+
+<body>
+    <div id="popup" class="modal"> <!-- 遮罩层 -->
+        <div class="container">
+            <p>
+            <h2>确认退出登录？</h2>
+            </p>
+            <div class="close">
+                <a href="javascript:void(0)" onclick="closePop();">X</a>
+            </div>
+            <div class="back">
+                <button class="button1" onclick="window.location.href='./login.html'">确认</button>
+                <button class="button2" onclick="closePop();">取消</button>
+            </div>
+        </div>
+    </div>
+    <ul class="topnav">
+        <li class="logo"><img src="../htmlpictures/logo2.jpg" alt="MAIDONGDONG" height="60px"></li>
+        <li><a href="./main.html">首页</a></li>
+        <li><a class="active"href="./userCenter.html">个人中心</a></li>
+        <li><a  href="./collect.html">我的收藏</a></li>
+        <li><a href="./mygoods.html">我的商品</a></li>
+        <li><a href="./upload.html">商品上传</a></li>
+        <li id="poplayer" style="float:right;"><a class="right" href="javascript:void(0)" onclick="popDiv();">退出登录</a></li>
+        <li style="float:right;"><a id="name" class="right" href="./userCenter.html">登录</a></li>
+        </ul>
+    <section>
+        <div class="top1">
+             <div class="profilephoto">
+                 <img src="../htmlpictures/profilephoto.jpg" alt="头像" height="150px" width="150px">
+             </div>
+             <div class="usertext">
+                <div class="username1">
+                    <!-- <img src="../pictures/circle-user-regular.svg" alt="用户名"height="20px">  -->
+                    <i class="fa-regular fa-circle-user" style="font-size: 20px; color: #9dc6ec;"></i>
+                    <span id="userdename"><b>3Q真寻</b></span>
+                    <button class="buttonu1" onclick="popDiv3();">编辑</button>
+                </div>
+                <div class="usertitle">
+                    <img src="../htmlpictures/level.png" alt="level" class="usertitleimg" height="12px">
+                  <span class="usertitletext">正式会员</span>
+                  <span id="id" class="userid">id:119162714</span>
+                </div>
+                <div class="signature">
+                    <!-- <img src="../pictures/newspaper-solid.svg" alt="个性签名"height="14px"> -->
+                    <i class="fa-solid fa-newspaper" style="font-size: 14px;color:#CF5A5A"></i>
+                    <span id="signaturetext" class="signaturetext">你所热爱的，就是你的生活。</span>
+                    
+                </div>
+                   
+            </div> 
+            <div class="userpride">
+                <hr>
+                <span class="pridenumber">
+                    - 
+                </span>
+                <span class="pridetext">关注</span>
+                <span class="pridenumber">
+                    - 
+                </span>
+                <span class="pridetext">粉丝</span>
+                <span class="pridenumber">
+                    -
+                </span>
+                <span class="pridetext">获赞</span>
+            </div> 
+        </div>
+        <div class="left1">
+            <li class="listtitle">
+                个人中心
+            </li>
+            <hr class="hr2">
+            <div class="centerlist">
+                <div id="popleft1" class="popleft1" >
+                <li ><a href="#home" style="color: #CF5A5A;" onclick="popDiv3();">
+                    <i class="fa-regular fa-address-card" style="font-size: 20px; color: #cf5a5a;"></i>
+                    <span style="padding: 8px;">编辑资料</span></a>
+                </li>
+                <li class="bianjiziliao"><a href="#home" onclick="popDiv4();">
+                    <i class="fa-regular fa-keyboard" style="font-size: 20px; color: #989898;"></i>
+                    <span style="padding: 8px;">密码修改</span></a>
+                </li>
+                </div>
+                <div id="popleft2"class="popleft2">
+                    <li><a href="#home"  onclick="popDiv3();">
+                        <i class="fa-regular fa-address-card" style="font-size: 20px; color: #989898;"></i>
+                        <span style="padding: 8px;">编辑资料</span></a>
+                    </li>
+                    <li><a href="#home" style="color: #CF5A5A;" onclick="popDiv4();">
+                        <i class="fa-regular fa-keyboard" style="font-size: 20px; color: #cf5a5a;"></i>
+                        <span style="padding: 8px;">密码修改</span></a>
+                    </li>
+                </div>    
+                <li><a href="mygoods.html">
+                    <i class="fa-solid fa-cart-shopping" style="font-size: 20px; color:#989898;"></i>
+                    <span style="padding: 8px;">我的商品</span></a>
+                </li>
+                <li><a href="./upload.html">
+                    <i class="fa-solid fa-arrow-up-from-bracket" style="font-size: 20px; color: #989898;"></i>
+                    <span style="padding: 8px;">上传商品</span></a>
+                </li>
+                <li><a href="./collect.html">
+                    <i class="fa-solid fa-star" style="font-size: 20px; color: #989898;"></i>
+                    <span style="padding: 8px;">我的收藏</span></a>
+                </li>
+                <li><a href="#home">
+                    <i class="fa-solid fa-person-circle-plus" style="font-size: 20px; color: #989898;"></i>
+                    <span style="padding: 8px;">我的关注</span></a>
+                </li>
+                <li><a href="#home">
+                    <i class="fa-regular fa-heart" style="font-size: 20px; color: #989898;"></i>
+                    <span style="padding: 8px;">我的粉丝</span></a>
+                </li>
+            </div>
+
+        </div>
+        <div id="popright1" class="right1">
+                <li class="contenttitle">
+                    编辑资料
+                </li>
+                <hr class="hr2">
+                <div class="content1">
+                    <div class="cont1">
+                    <img src="../htmlpictures/profilephoto.jpg" alt="上传头像" height="120px" width="120px">
+                    </div>
+                    <button id="poplayer2" class="cont2" onclick="popDiv2();">修改头像</button>
+                    <div class="cont3">
+                        <li class="cont3txt">
+                            昵称
+                        </li>
+                        <li class="cont3txt" style="padding-top:30px ;">
+                            个性签名
+                        </li>
+                    </div>
+                    <div class="cont4">
+                        <li>
+                            <input  id="newname" type="text" >
+                        </li>
+                        
+                        <li>
+                            <textarea id="newusermessage" class="in2"  rows="3" ></textarea>
+                        </li>
+                        <button id="msgupload" class="buttonu2";>提交</button>
+                    </div>
+            </div>
+        </div>
+        <div id="popright2" class="right2">
+            <li class="contenttitle">
+                密码修改
+            </li>
+            <hr class="hr2">
+            <div class="content1">
+                <div class="cont3">
+                    <li  class="cont3txt">
+                        原密码
+                    </li>
+                    <li  class="cont3txt" style="padding-top: 30px ;">
+                        新密码
+                    </li>
+                    <li  class="cont3txt" style="padding-top:30px ;">
+                        确认新密码
+                    </li>
+                </div>
+                <div class="cont4">
+                    <li>
+                        <input id="oldpassword" type="password" >
+                    </li>
+                    <li>
+                        <input  id="newpassword1" type="password" style="margin-top: 24px;">
+                    </li>
+                    <li>
+                        <input id="newpassword2"  type="password" style="margin-top: 24px;">
+                    </li>
+                    <button id="pwdchange" class="buttonu2";>提交</button>
+                </div>
+                <div>
+                    <img src="../htmlpictures/logo2.png" alt="MAIDONGDONG" height="70px">
+                </div>
+            </div>
+        </div>
+        <div id="popup2" class="modal2"> <!-- 遮罩层2 -->
+            <div class="container2">
+                <p>
+                    <span class="modal2title" ><b>修改头像</b></span>
+                <hr class="hr2">
+                </p>
+                <div class="close2">
+                    <a href="javascript:void(0)" onclick="closepop2();">X</a>
+                </div>
+                <div class="upimg">
+                    <span style="font-size: 14px;padding-right: 20px;" >上传图片</span>
+                    <input id="prpfileup" type="file" accept="image/*" >
+                    
+                </div>
+                <div class="uptxt">
+                    请上传尺寸为1×1的图片
+                </div>
+                <div class="preimg">
+                    <img id="profilecut" src="../pictures/profilephoto.jpg" height="354px">
+                    
+
+                </div>
+                <div>
+                    <button class="button11" onclick=";">确认</button>
+                    <button class="button12" onclick="closepop2();">取消</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <script src="../js/jquery.min.js"></script>
+<script>
+    isLogin();
+function isLogin(){
+$.ajax({
+    url:'/api/islogin',
+    type:'get',
+    headers:{
+        Authorization:localStorage.token
+    },
+    success(msg){if(msg.status){alert('你还没有登录')
+    location.href="./login.html"}
+    else{
+        
+        var a1 = document.getElementById("name");
+        a1.innerHTML = msg.data.name  ;
+        var a2 = document.getElementById("userdename");
+        a2.innerHTML = msg.data.name  ;
+        var a3 = document.getElementById("id");
+        a3.innerHTML = "id:"+msg.data.id  ;
+        var a4 = document.getElementById("signaturetext");
+        a4.innerHTML = msg.data.usermessage ;
+        
+    }
+},
+    error(err){
+if(err.status==401){alert('你还没有登录')
+location.href="./login.html"
+}
+    }
+})
+}
+$('#pwdchange').click(function(){
+    const oldpassword=$('#oldpassword').val();
+const newpassword=$('#newpassword1').val();
+const newpassword2=$('#newpassword2').val();
+console.log(newpassword)
+console.log(newpassword2)
+
+if(newpassword===newpassword2)
+    $.ajax({
+    url:'/my/updatepwd',
+    type:'post',
+    headers:{
+        Authorization:localStorage.token
+    },
+    data:{
+        oldpassword,newpassword
+    },
+    success(msg){
+        if(msg.status===0)
+        {alert(msg.message)
+            localStorage.setItem("token","")  
+            location.href = './login.html';        }
+            else alert(msg.message)
+}
+})
+else alert("确认新密码错误")
+
+})
+$('#msgupload').click(function(){
+    const name=$('#newname').val();
+    const usermessage=$('#newusermessage').val();
+    console.log(name)
+    console.log(usermessage)
+    $.ajax({
+    url:'/my/userinfo',
+    type:'post',
+    headers:{
+        Authorization:localStorage.token
+    },
+    data:{
+        name,usermessage
+    },
+    success(msg){
+        if(msg.status===0)
+        {alert(msg.message)
+ 
+         
+            $.ajax({
+        url:'/api/login2',
+        headers:{
+        Authorization:localStorage.token
+    },
+        type:'post',
+        success(msg){
+            // console.log(msg)
+            if(!msg.status)
+            { 
+            localStorage.token=msg.token
+            
+              }
+           
+        }
+    })
+            location.href = './usercenter.html';        }
+            else {   alert(msg.message)}
+}
+})
+
+
+})
+
+
+
+
+</script>
+</body>
+
+</html>
